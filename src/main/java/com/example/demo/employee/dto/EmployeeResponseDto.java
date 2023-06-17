@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -34,4 +34,8 @@ public class EmployeeResponseDto {
     private String department;
 
     private String jobHistory;
+
+    private Date startDate;
+
+    private Date endDate;
 }

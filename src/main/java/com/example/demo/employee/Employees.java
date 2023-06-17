@@ -18,7 +18,7 @@ import java.sql.Date;
 public class Employees {
 
     @Id
-    private Long employeeId;
+    private Integer employeeId;
     @Column
     private String firstName;
     @Column
@@ -39,5 +39,9 @@ public class Employees {
     private int managerId;
     @Column
     private int departmentId;
+
+    public void updateSalary(double percent){
+        this.salary = salary * percent;
+    }
 
 }

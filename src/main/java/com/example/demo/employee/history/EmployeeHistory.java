@@ -1,4 +1,4 @@
-package com.example.demo.employee;
+package com.example.demo.employee.history;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,5 +23,8 @@ public class EmployeeHistory {
     private Date startDate;
     @Column
     private Date endDate;
-
+    @Column
+    private String jobId;
+    @Column
+    private Integer departmentId;
 }
