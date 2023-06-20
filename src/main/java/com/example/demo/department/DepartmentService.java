@@ -19,9 +19,9 @@ public class DepartmentService {
     // 특정 부서의 급여 인상
     public ResponseEntity<?> updateSalary (SalaryRequestDto requestDto){
 
-        int department = requestDto.getDepartment();
+        Integer department = requestDto.getDepartment();
         List<Employees> employees = employeeRepository.findByDepartmentId(department);
-        String departmentName = departmentRepository.findByDepartmentId(department).get().getDepartmentName();
+        String departmentName = departmentRepository.findByDepartmentId(department).getDepartmentName();
 
         // 인상률 구하기
         double percent = requestDto.getPercent() * 0.01 + 1;

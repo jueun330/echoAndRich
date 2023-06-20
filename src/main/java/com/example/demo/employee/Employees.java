@@ -32,13 +32,13 @@ public class Employees {
     @Column
     private String jobId;
     @Column
-    private double salary;
+    private Double salary;
     @Column
-    private double commissionPct;
+    private Double commissionPct;
     @Column
-    private int managerId;
+    private Integer managerId;
     @Column
-    private int departmentId;
+    private Integer departmentId;
 
     public void updateSalary(double percent){
         this.salary = salary * percent;

@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SalaryRequestDto {
+
+    //부서 명
     private int department;
+    //급여 인상률
     private int percent;
 }

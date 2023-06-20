@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Entity
-public class EmployeeHistory {
+public class JobHistory {
 
     @Id
     private Integer employeeId;

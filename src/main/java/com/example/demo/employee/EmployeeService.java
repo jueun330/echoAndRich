@@ -3,8 +3,8 @@ package com.example.demo.employee;
 import com.example.demo.department.DepartmentRepository;
 import com.example.demo.department.Departments;
 import com.example.demo.employee.dto.EmployeeResponseDto;
-import com.example.demo.employee.history.EmployeeHistory;
-import com.example.demo.employee.history.EmployeeHistoryRepository;
+import com.example.demo.employee.history.JobHistory;
+import com.example.demo.employee.history.JobHistoryRepository;
 import com.example.demo.job.JobRepository;
 import com.example.demo.job.Jobs;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
     private final JobRepository jobRepository;
-    private final EmployeeHistoryRepository historyRepository;
+    private final JobHistoryRepository historyRepository;
 
     // 직원의 현재 정보 구하기
     public ResponseEntity<EmployeeResponseDto> getEmployeeInfo(Integer employeeId) {
@@ -48,22 +48,22 @@ public class EmployeeService {
 
     // 직원의 이력 구하기
     public ResponseEntity<?> getEmployeeHistory(Integer employeeId) {
-        EmployeeHistory employeeHistory = historyRepository.findByEmployeeId(employeeId).get();
+        JobHistory jobHistory = historyRepository.findByEmployeeId(employeeId);
 
-        if (employeeHistory == null) {
+        if (jobHistory == null) {
             return ResponseEntity.ok("해당 직원의 변경 내역이 없습니다.");
         } else {
-            String jobId = employeeHistory.getJobId();
+            String jobId = jobHistory.getJobId();
             String job = jobRepository.findByJobId(jobId).get().getJobTitle();
 
-            Integer departmentId = employeeHistory.getDepartmentId();
-            String department = departmentRepository.findByDepartmentId(departmentId).get().getDepartmentName();
+            Integer departmentId = jobHistory.getDepartmentId();
+            String department = departmentRepository.findByDepartmentId(departmentId).getDepartmentName();
 
             EmployeeResponseDto responseDto = EmployeeResponseDto.builder()
                     .jobHistory(job)
                     .department(department)
-                    .startDate(employeeHistory.getStartDate())
-                    .endDate(employeeHistory.getEndDate())
+                    .startDate(jobHistory.getStartDate())
+                    .endDate(jobHistory.getEndDate())
                     .build();
 
             return ResponseEntity.ok(responseDto);
@@ -81,7 +81,7 @@ public class EmployeeService {
             Integer departmentId = employees.getDepartmentId();
             String jobId = employees.getJobId();
 
-            Departments department = departmentRepository.findByDepartmentId(departmentId).get();
+            Departments department = departmentRepository.findByDepartmentId(departmentId);
             Jobs job = jobRepository.findByJobId(jobId).get();
             infoList.put("부서", department.getDepartmentName());
             infoList.put("직업", job.getJobTitle());
